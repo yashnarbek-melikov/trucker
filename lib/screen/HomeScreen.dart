@@ -14,8 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Logbook> logbookList = [
     Logbook(date: 'Today - May 21 Monday', signed: false, isViolation: true),
-    Logbook(date: 'May 20 Sunday',signed: true,isViolation: false),
-    Logbook(date: 'May 19 Saturday',signed: false,isViolation: false)
+    Logbook(date: 'May 20 Sunday', signed: true, isViolation: false),
+    Logbook(date: 'May 19 Saturday', signed: false, isViolation: true)
   ];
 
   @override
@@ -434,10 +434,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (index != logbookList.length - 1) {
                     bottomMargin = 0.0;
                   }
-                  return Card(
-                    elevation: 0,
+                  return Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20)),
                     margin: EdgeInsets.only(top: 16, bottom: bottomMargin),
-                    color: Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 20),
@@ -447,35 +448,45 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                if(logbook.date != null)
-                                Text(
-                                  logbook.date!,
-                                  style: TextStyle(
-                                      color: Color(0xFF1C293E),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
-                                ) ,
+                                if (logbook.date != null)
+                                  Text(
+                                    logbook.date!,
+                                    style: const TextStyle(
+                                        color: Color(0xFF1C293E),
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 if (logbook.signed)
                                   Container(
-                                    child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 6),
-                                        child: Text('Signed')),
                                     decoration: BoxDecoration(
                                         color: Color(0xFFE8F1FE),
                                         borderRadius:
                                             BorderRadius.circular(10)),
+                                    child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 6),
+                                        child: Text(
+                                          'Signed',
+                                          style: TextStyle(
+                                              color: Color(0xFF1872F6),
+                                              fontSize: 12),
+                                        )),
                                   )
                                 else
                                   Container(
-                                    child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 6),
-                                        child: Text('Not Signed')),
                                     decoration: BoxDecoration(
                                         color: Color(0xFFE9EAEC),
                                         borderRadius:
                                             BorderRadius.circular(10)),
+                                    child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 6),
+                                        child: Text(
+                                          'Not Signed',
+                                          style: TextStyle(
+                                              color: Color(0xFF9FA5AE),
+                                              fontSize: 12),
+                                        )),
                                   )
                               ],
                             ),
@@ -486,10 +497,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                              if(logbook.isViolation)
+                            if (logbook.isViolation)
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     '6 violations',
                                     style: TextStyle(
                                         color: Color(0xFF1C293E),
@@ -499,7 +511,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                  SvgPicture.asset('assets/images/bottom_blue.svg')
+                                  SvgPicture.asset(
+                                      'assets/images/bottom_blue.svg', width: 6, height: 12,)
                                 ],
                               ),
                           ]),
