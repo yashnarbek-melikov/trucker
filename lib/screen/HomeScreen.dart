@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trucker/dropdown/DropDown.dart';
+import 'package:trucker/screen/LogBookScreen.dart';
 
 import '../model/Logbook.dart';
 import '../spedometer/GaugeView.dart';
@@ -375,55 +377,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-              child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  color: Color(0xFF41B631),
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Current Status',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              'Driving',
-                              style: TextStyle(
-                                  fontSize: 36,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                        Card(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                          color: Colors.white,
-                          child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 18, vertical: 22),
-                              child: SvgPicture.asset(
-                                  'assets/images/bottom_green.svg')),
-                        )
-                      ],
-                    ),
-                  )),
-            ),
+            CustomDropDownButton(),
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
