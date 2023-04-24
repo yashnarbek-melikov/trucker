@@ -28,10 +28,218 @@ class CustomDropDownButton extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDownButton> {
+  OverlayEntry? overlayEntry;
+  final layerLink = LayerLink();
 
   CurrentItem dropdownValue = list.first;
   bool state = false;
   String bottomIcon = "assets/images/bottom_green.svg";
+
+  void createHighlightOverlay() {
+    // Remove the existing OverlayEntry.
+    removeHighlightOverlay();
+
+    assert(overlayEntry == null);
+
+    final renderBox = context.findRenderObject() as RenderBox;
+    final size = renderBox.size;
+
+    overlayEntry = OverlayEntry(
+        // Create a new OverlayEntry.
+        builder: (BuildContext context) => (Positioned(
+              width: size.width,
+              child: CompositedTransformFollower(
+                link: layerLink,
+                offset: Offset(0, -310),
+                child: Column(
+                  children: [
+                    if (state)
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 16, right: 16),
+                        child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                CurrentItem currentValue = dropdownValue;
+                                dropdownValue = list[3];
+                                list[3] = currentValue;
+                                state = false;
+                                removeHighlightOverlay();
+                              });
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(list[3].color)),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        list[3].title,
+                                        style: const TextStyle(
+                                            fontSize: 36,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      width: 150,
+                                      child: Text(
+                                        list[3].subtitle,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600),
+                                      ))
+                                ],
+                              ),
+                            )),
+                      ),
+                    if (state)
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 16, right: 16),
+                        child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                CurrentItem currentValue = dropdownValue;
+                                dropdownValue = list[2];
+                                list[2] = currentValue;
+                                state = false;
+                                removeHighlightOverlay();
+                              });
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(list[2].color)),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        list[2].title,
+                                        style: const TextStyle(
+                                            fontSize: 36,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      width: 150,
+                                      child: Text(
+                                        list[2].subtitle,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600),
+                                      ))
+                                ],
+                              ),
+                            )),
+                      ),
+                    if (state)
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 16, right: 16),
+                        child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                CurrentItem currentValue = dropdownValue;
+                                dropdownValue = list[1];
+                                list[1] = currentValue;
+                                state = false;
+                                removeHighlightOverlay();
+                              });
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(list[1].color)),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        list[1].title,
+                                        style: const TextStyle(
+                                            fontSize: 36,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      width: 150,
+                                      child: Text(
+                                        list[1].subtitle,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600),
+                                      ))
+                                ],
+                              ),
+                            )),
+                      ),
+                  ],
+                ),
+              ),
+            )));
+
+    // Add the OverlayEntry to the Overlay.
+    Overlay.of(context, debugRequiredFor: widget).insert(overlayEntry!);
+  }
+
+  void removeHighlightOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
+  }
+
+  @override
+  void dispose() {
+    removeHighlightOverlay();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,24 +249,19 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
       bottomIcon = "assets/images/bottom_green.svg";
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if(state)
+    return CompositedTransformTarget(
+      link: layerLink,
+      child: Column(
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
             child: TextButton(
                 onPressed: () {
-                  setState(() {
-                    CurrentItem currentValue = dropdownValue;
-                    dropdownValue = list[3];
-                    list[3] = currentValue;
-                    state = false;
-                  });
+                  setState(() {});
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(list[3].color)),
+                      Color(dropdownValue.color)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -73,8 +276,18 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const Text(
+                            'Current Status',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
                           Text(
-                            list[3].title,
+                            dropdownValue.title,
                             style: const TextStyle(
                                 fontSize: 36,
                                 color: Colors.white,
@@ -82,186 +295,42 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                           ),
                         ],
                       ),
-                      SizedBox(width: 150,
-                          child: Text(list[3].subtitle, style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),))
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (!state) {
+                              state = true;
+                              createHighlightOverlay();
+                            } else {
+                              state = false;
+                              removeHighlightOverlay();
+                            }
+                          });
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 20),
+                            child: SvgPicture.asset(
+                              bottomIcon,
+                              color: Color(dropdownValue.color),
+                            )),
+                      )
                     ],
                   ),
                 )),
           ),
-        if(state)
-          Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    CurrentItem currentValue = dropdownValue;
-                    dropdownValue = list[2];
-                    list[2] = currentValue;
-                    state = false;
-                  });
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(list[2].color)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            list[2].title,
-                            style: const TextStyle(
-                                fontSize: 36,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 150,
-                          child: Text(list[2].subtitle, style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),))
-                    ],
-                  ),
-                )),
-          ),
-        if(state)
-          Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    CurrentItem currentValue = dropdownValue;
-                    dropdownValue = list[1];
-                    list[1] = currentValue;
-                    state = false;
-                  });
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(list[1].color)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            list[1].title,
-                            style: const TextStyle(
-                                fontSize: 36,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 150,
-                          child: Text(list[1].subtitle, style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),))
-                    ],
-                  ),
-                )),
-          ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-          child: TextButton(
-              onPressed: () {
-                setState(() {
-
-                });
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    Color(dropdownValue.color)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Current Status',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          dropdownValue.title,
-                          style: const TextStyle(
-                              fontSize: 36,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-
-                    TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                        shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          if (!state) {
-                            state = true;
-                          }
-                          else {
-                            state = false;
-                          }
-                        });
-                      },
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 20),
-                          child: SvgPicture.asset(
-                            bottomIcon, color: Color(dropdownValue.color),)),
-                    )
-                  ],
-                ),
-              )),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
