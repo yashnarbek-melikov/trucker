@@ -1,12 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trucker/dropdown/DropDown.dart';
-import 'package:trucker/screen/LogBookScreen.dart';
+import 'package:trucker/dropdown/drop_down.dart';
+import 'package:trucker/screen/logbook_screen.dart';
 
-import '../model/Logbook.dart';
-import '../spedometer/GaugeView.dart';
+import '../model/logbook.dart';
+import '../spedometer/gauge_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -441,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 15,
                             ),
-                            SvgPicture.asset('assets/images/graph.svg'),
+                            SvgPicture.asset('assets/images/graph.svg', width: MediaQuery.of(context).size.width,),
                             const SizedBox(
                               height: 20,
                             ),
@@ -466,7 +468,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ]),
                     ),
                   );
-                })
+                }),
+            SizedBox(
+              height: 88,
+            )
           ],
         ),
       ),

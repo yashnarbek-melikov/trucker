@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:trucker/screen/HomeScreen.dart';
-import 'package:trucker/screen/InspectionScreen.dart';
-import 'package:trucker/screen/LogBookScreen.dart';
-import 'package:trucker/screen/MoreScreen.dart';
+import 'package:trucker/screen/home_screen.dart';
+import 'package:trucker/screen/inspection_screen.dart';
+import 'package:trucker/screen/logbook_screen.dart';
+import 'package:trucker/screen/more_screen.dart';
+
+int _selectedIndex = 0;
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
@@ -27,22 +29,13 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
-
   @override
   State<MyHomePage> createState() => BottomState();
 }
 
 class BottomState extends State<MyHomePage> {
 
-  int _selectedIndex = 0;
   late List<Widget> _widgetOptions;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
 
   @override
   void initState() {
@@ -74,10 +67,10 @@ class BottomState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            bottomNavigationBarItem('assets/images/home.svg', 'Home'),
-            bottomNavigationBarItem('assets/images/logbook.svg', 'Logbook'),
-            bottomNavigationBarItem('assets/images/inspection.svg', 'Inspection'),
-            bottomNavigationBarItem('assets/images/more.svg', 'More'),
+            bottomNavigationBarItem('assets/images/home.svg', 'Home', 0),
+            bottomNavigationBarItem('assets/images/logbook.svg', 'Logbook', 1),
+            bottomNavigationBarItem('assets/images/inspection.svg', 'Inspection', 2),
+            bottomNavigationBarItem('assets/images/more.svg', 'More', 3),
           ],
         ),
       )
@@ -103,24 +96,39 @@ class BottomState extends State<MyHomePage> {
     );
   }
 
+  Color selectedColor(int index) {
+    return _selectedIndex == index? Colors.white : Color(0xFF8D949E);
+  }
 
   Widget bottomNavigationBarItem(
-      String assetImage, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: SvgPicture.asset(
-            assetImage,
-            width: 21,
-            height: 21,
-            colorFilter: const ColorFilter.mode(Color(0xFF8D949E), BlendMode.srcIn),
-          ),
+      String assetImage, String label, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4,),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: SvgPicture.asset(
+                assetImage,
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(selectedColor(index), BlendMode.srcIn),
+              ),
+            ),
+            Text(label,style: TextStyle(fontSize: 12, color: selectedColor(index),),)
+          ],
         ),
-        Text(label,style: const TextStyle(fontSize: 12, color: Colors.white),)
-      ],
+      ),
     );
+
     // return BottomNavigationBarItem(
     //   icon: Padding(
     //     padding: const EdgeInsets.only(bottom: 8),

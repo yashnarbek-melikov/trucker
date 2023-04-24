@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 // }
 
 import 'package:flutter/material.dart';
-import 'package:trucker/spedometer/GaugeView.dart';
+import 'package:trucker/spedometer/gauge_view.dart';
 
 class InspectionScreen extends StatefulWidget {
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../model/CurrentItem.dart';
+import '../model/current_item.dart';
 
 List<CurrentItem> list = <CurrentItem>[
   CurrentItem(
