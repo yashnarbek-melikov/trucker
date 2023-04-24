@@ -92,7 +92,7 @@ class GaugeViewState extends State<GaugeView>
   @override
   void initState() {
     if (_animate) {
-      WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         updateSpeed(_speed, animate: _animate);
       });
     } else {
@@ -320,7 +320,7 @@ class _KdGaugeCustomPainter extends CustomPainter {
 
     Offset unitOfMeasurementOffset = Offset(size.width / 2, minTextOffset.dy);
 
-    TextSpan span = new TextSpan(
+    TextSpan span = TextSpan(
         style: unitOfMeasurementTextStyle, text: unitOfMeasurement);
     TextPainter textPainter = TextPainter(
       text: span,
@@ -341,7 +341,7 @@ class _KdGaugeCustomPainter extends CustomPainter {
 
     Offset? unitOfMeasurementOffset = center;
 
-    TextSpan span = new TextSpan(
+    TextSpan span = TextSpan(
         style: speedTextStyle, text: speed.toStringAsFixed(fractionDigits));
     TextPainter textPainter = TextPainter(
       text: span,

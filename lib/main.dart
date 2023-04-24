@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: MyHomePage(),
@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
 
   @override
   State<MyHomePage> createState() => BottomState();
@@ -31,12 +33,7 @@ class MyHomePage extends StatefulWidget {
 class BottomState extends State<MyHomePage> {
 
   int _selectedIndex = 0;
-  final List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    LogBookScreen(),
-    InspectionScreen(),
-    MoreScreen(),
-  ];
+  late List<Widget> _widgetOptions;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -44,40 +41,26 @@ class BottomState extends State<MyHomePage> {
     });
   }
 
-  BottomNavigationBarItem bottomNavigationBarItem(
-      String assetImage, String label) {
-    return BottomNavigationBarItem(
-      icon: Padding(
-        padding: EdgeInsets.only(bottom: 8),
-        child: SvgPicture.asset(
-          assetImage,
-          width: 21,
-          height: 21,
-          color: Color(0xFF8D949E),
-        ),
-      ),
-      activeIcon: Padding(
-        padding: EdgeInsets.only(bottom: 8),
-        child: SvgPicture.asset(
-          assetImage,
-          color: Colors.white,
-          width: 21,
-          height: 21,
-        ),
-      ),
-      label: label,
-    );
-  }
 
+  @override
+  void initState() {
+  _widgetOptions  = <Widget>[
+    HomeScreen(),
+    LogBookScreen(),
+    InspectionScreen(),
+    MoreScreen(),
+    ];
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _widgetOptions[_selectedIndex],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
         child: Container(
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
@@ -91,24 +74,51 @@ class BottomState extends State<MyHomePage> {
           child: SizedBox(
             height: 76,
             child: BottomNavigationBar(
-              backgroundColor: Color(0xFF1C293E),
+              backgroundColor: const Color(0xFF1C293E),
               items: <BottomNavigationBarItem>[
                 bottomNavigationBarItem('assets/images/home.svg', 'Home'),
                 bottomNavigationBarItem('assets/images/logbook.svg', 'Logbook'),
                 bottomNavigationBarItem('assets/images/inspection.svg', 'Inspection'),
                 bottomNavigationBarItem('assets/images/more.svg', 'More'),
               ],
-              selectedLabelStyle: TextStyle(fontSize: 12),
-              unselectedLabelStyle: TextStyle(fontSize: 12),
+              selectedLabelStyle: const TextStyle(fontSize: 12),
+              unselectedLabelStyle: const TextStyle(fontSize: 12),
               currentIndex: _selectedIndex,
               selectedItemColor: Colors.white,
               type: BottomNavigationBarType.fixed,
               onTap: _onItemTapped,
-              unselectedItemColor: Color(0xFF8D949E),
+              unselectedItemColor: const Color(0xFF8D949E),
             ),
           ),
         ),
       ),
     );
   }
+
+
+  BottomNavigationBarItem bottomNavigationBarItem(
+      String assetImage, String label) {
+    return BottomNavigationBarItem(
+      icon: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SvgPicture.asset(
+          assetImage,
+          width: 21,
+          height: 21,
+          colorFilter: const ColorFilter.mode(Color(0xFF8D949E), BlendMode.srcIn),
+        ),
+      ),
+      activeIcon: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SvgPicture.asset(
+          assetImage,
+          colorFilter: const ColorFilter.mode(Color(0xFF8D949E), BlendMode.srcIn),
+          width: 21,
+          height: 21,
+        ),
+      ),
+      label: label,
+    );
+  }
 }
+

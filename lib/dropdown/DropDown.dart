@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -67,7 +66,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -76,7 +75,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         children: [
                           Text(
                             list[3].title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 36,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700),
@@ -84,7 +83,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         ],
                       ),
                       SizedBox(width: 150,
-                          child: Text(list[3].subtitle, style: TextStyle(
+                          child: Text(list[3].subtitle, style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w600),))
@@ -114,7 +113,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -123,7 +122,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         children: [
                           Text(
                             list[2].title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 36,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700),
@@ -131,7 +130,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         ],
                       ),
                       SizedBox(width: 150,
-                          child: Text(list[2].subtitle, style: TextStyle(
+                          child: Text(list[2].subtitle, style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w600),))
@@ -161,7 +160,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -170,7 +169,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         children: [
                           Text(
                             list[1].title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 36,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700),
@@ -178,7 +177,7 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                         ],
                       ),
                       SizedBox(width: 150,
-                          child: Text(list[1].subtitle, style: TextStyle(
+                          child: Text(list[1].subtitle, style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w600),))
@@ -204,26 +203,26 @@ class _CustomDropDownState extends State<CustomDropDownButton> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Current Status',
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 3,
                         ),
                         Text(
                           dropdownValue.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 36,
                               color: Colors.white,
                               fontWeight: FontWeight.w700),
