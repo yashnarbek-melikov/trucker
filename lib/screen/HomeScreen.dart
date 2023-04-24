@@ -24,14 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF6F7F9),
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Color(0xFFF6F7F9),
-            statusBarIconBrightness: Brightness.dark),
-        toolbarHeight: 0,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.top),
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
